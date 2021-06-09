@@ -1,3 +1,5 @@
+
+
 export function map(arr, callback) {
 
   const newArray = [];
@@ -26,4 +28,15 @@ export function findIndex(arr, callback) {
       return i;
     }
   }
+}
+
+export function myReduce(arr, initialValue, callback) {
+  if(arr.length === 0) {
+    return initialValue;
+  }
+  else {
+    const [first, ...rest] = arr;
+    const updatedAcc = callback(initialValue, first);
+    return myReduce(rest, updatedAcc, callback);
+  } 
 }

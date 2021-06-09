@@ -1,4 +1,4 @@
-import { filter, findIndex, map } from './array-methods.js';
+import { filter, findIndex, map, myReduce } from './array-methods.js';
 
 describe('map(arr, callback)', () => {
   it('Takes an array and callback fn, creates new array with the return value of each called callback', () => {
@@ -25,5 +25,20 @@ describe('findIndex(arr, callback, [, initialValue])', () => {
     const isGreaterThan5 = item => item > 5;
 
     expect(findIndex(numbers, isGreaterThan5)).toEqual(3);
+  });
+});
+
+describe('reduce(arr, callback, [, initialValue])', () => {
+  it('Takes an array and callback, an optional second parameter as the initial value of accumulator, return value is passed as the argument of accumulator after each function call, and returns final accumulator value', () => {
+    const words = ['hello', 'world', 'hello', 'dogs', 'hello', 'cats'];
+    const countWords = wordList => {
+      return myReduce(wordList, {}, (acc, word) => {
+        acc[word] = (acc[word] || 0) + 1;
+        return acc;
+      });
+      
+    };
+
+    expect(countWords(words)).toEqual({ hello: 3, world: 1, dogs: 1, cats: 1 });
   });
 });
