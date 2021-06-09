@@ -1,9 +1,10 @@
 export function map(arr, callback) {
+
   const newArray = [];
   for(let i = 0; i < arr.length; i++) {
-    const currentItem = arr[i];
-  
-    newArray[i] = callback(currentItem);
+    newArray[i] = callback(arr[i]);
+
+    
   }
   return newArray;
 }
@@ -11,8 +12,9 @@ export function map(arr, callback) {
 export function filter(arr, callback) {
   const newArray = [];
   for(let i = 0; i < arr.length; i++) {
-    const currentItem = arr[i];
 
+    if((arr[i] !== undefined) && callback(arr[i])) newArray[newArray.length] = arr[i];
     
   }
+  return newArray;
 }
