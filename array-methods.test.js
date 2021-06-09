@@ -1,4 +1,4 @@
-import { filter, findIndex, map, myReduce } from './array-methods.js';
+import { every, filter, findIndex, map, myReduce } from './array-methods.js';
 
 describe('map(arr, callback)', () => {
   it('Takes an array and callback fn, creates new array with the return value of each called callback', () => {
@@ -30,15 +30,22 @@ describe('findIndex(arr, callback, [, initialValue])', () => {
 
 describe('reduce(arr, callback, [, initialValue])', () => {
   it('Takes an array and callback, an optional second parameter as the initial value of accumulator, return value is passed as the argument of accumulator after each function call, and returns final accumulator value', () => {
-    const words = ['hello', 'world', 'hello', 'dogs', 'hello', 'cats'];
-    const countWords = wordList => {
-      return myReduce(wordList, {}, (acc, word) => {
-        acc[word] = (acc[word] || 0) + 1;
-        return acc;
-      });
-      
+    const numbers = [1, 5, 7, 9];
+    const reducer = (acc, current) => {
+      return current + acc;
     };
 
-    expect(countWords(words)).toEqual({ hello: 3, world: 1, dogs: 1, cats: 1 });
+    expect(myReduce(numbers, 0, reducer)).toEqual(22);
   });
 });
+
+describe('every(arr, callback)', () => {
+  it('Takes an array and callback, returns an overall true value if all callback returns are true', () => {
+    const numbers = [11, 12, 13, 14, 14, 15, 16, 17, 18, 19, 11, 12, 13, 14];
+
+    const largerThan10 = item => item > 10;
+
+    expect(every(numbers, largerThan10)).toEqual(true);
+  });
+});
+

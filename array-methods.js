@@ -31,12 +31,17 @@ export function findIndex(arr, callback) {
 }
 
 export function myReduce(arr, initialValue, callback) {
-  if(arr.length === 0) {
-    return initialValue;
+  let accumulator = initialValue;
+  for(let i = 0; i < arr.length; i++) {
+    
+    accumulator = callback(accumulator, arr[i]);
   }
-  else {
-    const [first, ...rest] = arr;
-    const updatedAcc = callback(initialValue, first);
-    return myReduce(rest, updatedAcc, callback);
-  } 
+  return accumulator;
+}
+
+export function every(arr, callback) {
+  for(let i = 0; i < arr.length; i++) {
+    if(!callback(arr[i])) return false;
+  }
+  return true;
 }
